@@ -6,8 +6,13 @@ services:
     container_name: nginx
     ports:
       - "443:443"
-  mariadb:
-    build: requirements/mariadb
-    container_name: mariadb
-    ports:
-      - "3306:3306"
+    depends_on:
+      - wordpress
+  # mariadb:
+  #   build: requirements/mariadb
+  #   container_name: mariadb
+  #   ports:
+  #     - "3306:3306"
+  wordpress:
+    build: requirements/wordpress
+    container_name: wordpress

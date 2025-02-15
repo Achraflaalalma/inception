@@ -1,6 +1,6 @@
 FROM debian:11
 
-# Install PHP and dependencies
+#Install PHP and dependencies
 RUN apt-get update && apt-get install -y \
     php-fpm \
     php-mysql \
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     wget \
     && apt-get clean
 
-    # Step 4: Create the necessar
-  RUN mkdir -p /var/www/html
+# Step 4: Create the necessar
+RUN mkdir -p /var/www/html
 
 # Install WordPress
 RUN wget https://wordpress.org/latest.tar.gz \
@@ -21,14 +21,9 @@ RUN wget https://wordpress.org/latest.tar.gz \
     && mv wordpress /var/www/html/ \
     && rm latest.tar.gz
 
-RUN echo "cgi.fix_pathinfo=0" >> /etc/php/7.4/fpm/php.ini
+# # Copy the configuration file
+# COPY wp-config.php /var/www/html/wordpress/wp-config.php
 
-#Configure the PHP-FPM pool (for better performance with WordPress)
-RUN echo "[www]" > /etc/php/7.4/fpm/pool.d/www.conf && \
-    echo "user = www-data" >> /etc/php/7.4/fpm/pool.d/www.conf && \
-    echo "group = www-data" >> /etc/php/7.4/fpm/pool.d/www.conf && \
-    echo "listen = /var/run/php/php7.4-fpm.sock" >> /etc/php/7.4/fpm/pool.d/www.conf
+# EXPOSE 9000
 
-EXPOSE 9000
-
-CMD ["php-fpm7.4", "-F"]
+# CMD ["php-fpm"]
