@@ -7,3 +7,4 @@ chmod +x wp-cli.phar
 ./wp-cli.phar core install --url=localhost --title=inception --admin_user=admin --admin_password=admin --admin_email=admin@admin.com --allow-root
 
 php-fpm7.4 -F
+
