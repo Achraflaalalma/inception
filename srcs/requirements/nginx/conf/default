@@ -12,10 +12,9 @@ server {
 
     # Pass PHP requests to the PHP-FPM container
     location ~ \.php$ {
-        include fastcgi_params;  # Include fastcgi_params (instead of fastcgi.conf)
-        fastcgi_pass wordpress:9000;  # This matches your PHP-FPM container
+        include fastcgi.conf;
+        fastcgi_pass wp-php:9000;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;  # Correct path to PHP script
     }
 
     # Add proper permissions for file access (if needed)

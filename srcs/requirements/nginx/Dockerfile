@@ -13,7 +13,7 @@ RUN apt-get update \
 #     && openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -days 365 -nodes -subj "/CN=localhost"
 
 # # Configure NGINX to use TLSv1.2
-COPY conf/my.conf /etc/nginx/conf.d/default.conf
+COPY conf /etc/nginx/sites-available/.
 
 # Expose ports (HTTP and HTTPS)
 EXPOSE 443

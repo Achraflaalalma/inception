@@ -5,27 +5,37 @@ services:
     ports:
       - "8000:80"
     volumes:
+      - ./requirements/nginx/conf:/etc/nginx/sites-available
       - wordpress_data:/var/www/html
     networks:
       - my_network
     depends_on:
       - wordpress
-  # mariadb:
-  #   build: requirements/mariadb
-  #   container_name: mariadb
-  #   ports:
-  #     - "3306:3306"
-
-  wordpress:
-    build: requirements/wordpress
-    container_name: wordpress
+  mariadb:
+    build: requirements/mariadb
+    container_name: mariadb
+    ports:
+      - "3306:3306"
     volumes:
-      - wordpress_data:/var/www/html
+      - mariadb_data:/var/lib/mysql
     networks:
       - my_network
 
+  wordpress:
+    build: requirements/wordpress
+    container_name: wp-php
+    volumes:
+      - wordpress_data:/var/www/html
+    env_file:
+      - ./requirements/wordpress/.env
+    networks:
+      - my_network
+    depends_on:
+      - mariadb
+
 volumes:
   wordpress_data:
+  mariadb_data:
 
 networks:
   my_network:

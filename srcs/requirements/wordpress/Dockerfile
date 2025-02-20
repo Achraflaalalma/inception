@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
  # Change the listen directive to use port 9000 (TCP)
-RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = wp-php:9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
 # Download WordPress
 RUN mkdir -p /var/www/html
@@ -28,9 +28,11 @@ RUN wget https://wordpress.org/latest.tar.gz \
     && rm latest.tar.gz \
     && rm -d wordpress
 
-# # Set proper permissions
+#Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+
+COPY wp-config.php /var/www/html/.
 
 # Expose the PHP-FPM port
 EXPOSE 9000
