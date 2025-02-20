@@ -22,21 +22,24 @@ RUN mkdir -p /var/www/html
 RUN mkdir -p /run/php
 
 # Download and install WordPress
-RUN wget https://wordpress.org/latest.tar.gz \
-    && tar -xvf latest.tar.gz \
-    && mv wordpress/* /var/www/html/ \
-    && rm latest.tar.gz \
-    && rm -d wordpress
+# RUN wget https://wordpress.org/latest.tar.gz \
+#     && tar -xvf latest.tar.gz \
+#     && mv wordpress/* /var/www/html/ \
+#     && rm latest.tar.gz \
+#     && rm -d wordpress
 
 #Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-COPY wp-config.php /var/www/html/.
+# COPY wp-config.php /var/www/html/.
+
+COPY script.sh .
+RUN chmod +x script.sh
 
 # Expose the PHP-FPM port
 EXPOSE 9000
 
 
 # Start PHP-FPM in the foreground
-CMD ["php-fpm7.4", "-F"]
+CMD ["./script.sh"]

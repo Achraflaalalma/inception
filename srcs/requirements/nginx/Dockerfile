@@ -9,11 +9,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # # Create SSL certificates (for testing, generate self-signed certs)
-# RUN mkdir -p /etc/ssl/private /etc/ssl/certs \
-#     && openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -days 365 -nodes -subj "/CN=localhost"
+RUN mkdir -p /etc/ssl/private /etc/ssl/certs \
+    && openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -days 365 -nodes -subj "/CN=localhost"
 
 # # Configure NGINX to use TLSv1.2
-COPY conf /etc/nginx/sites-available/.
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 # Expose ports (HTTP and HTTPS)
 EXPOSE 443

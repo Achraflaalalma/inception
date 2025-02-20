@@ -3,7 +3,7 @@ services:
     build: requirements/nginx
     container_name: nginx
     ports:
-      - "8000:80"
+      - "443:443"
     volumes:
       - ./requirements/nginx/conf:/etc/nginx/sites-available
       - wordpress_data:/var/www/html
