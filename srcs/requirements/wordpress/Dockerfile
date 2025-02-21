@@ -21,19 +21,11 @@ RUN mkdir -p /var/www/html
 # Create necessary directories
 RUN mkdir -p /run/php
 
-# Download and install WordPress
-# RUN wget https://wordpress.org/latest.tar.gz \
-#     && tar -xvf latest.tar.gz \
-#     && mv wordpress/* /var/www/html/ \
-#     && rm latest.tar.gz \
-#     && rm -d wordpress
-
 #Set proper permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# RUN chown -R www-data:www-data /var/www/html \
+#     && chmod -R 755 /var/www/html
 
-# COPY wp-config.php /var/www/html/.
-
+# Copy the script to the container and make it executable
 COPY script.sh .
 RUN chmod +x script.sh
 
@@ -43,3 +35,4 @@ EXPOSE 9000
 
 # Start PHP-FPM in the foreground
 CMD ["./script.sh"]
+# CMD ["php-fpm7.4", "-F"]

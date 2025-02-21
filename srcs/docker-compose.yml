@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   nginx:
     build: requirements/nginx
@@ -17,6 +19,8 @@ services:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+    env_file:
+      - .env
     networks:
       - my_network
 
@@ -25,8 +29,16 @@ services:
     container_name: wp-php
     volumes:
       - wordpress_data:/var/www/html
-    # env_file:
-    #   - ./requirements/wordpress/.env
+    env_file:
+      - .env
+    # environment:
+    #   MYSQL_USER: /run/secrets/credentials
+    #   MYSQL_PASSWORD: /run/secrets/db_password
+    #   MYSQL_ROOT_PASSWORD: /run/secrets/db_root_password
+    # secrets:
+    #   - credentials
+    #   - db_password
+    #   - db_root_password
     networks:
       - my_network
     depends_on:
@@ -39,3 +51,11 @@ volumes:
 networks:
   my_network:
     driver: bridge
+
+# secrets:
+#   credentials:
+#     external: true
+#   db_password:
+#     external: true
+#   db_root_password:
+#     external: true
