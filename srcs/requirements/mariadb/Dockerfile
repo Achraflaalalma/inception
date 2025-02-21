@@ -12,7 +12,7 @@ RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 # Expose the default MariaDB port
 EXPOSE 3306
 
-COPY init-db.sh .
+COPY tools/init-db.sh .
 RUN chmod +x init-db.sh
 
 # Start MariaDB

@@ -26,7 +26,7 @@ RUN mkdir -p /run/php
 #     && chmod -R 755 /var/www/html
 
 # Copy the script to the container and make it executable
-COPY script.sh .
+COPY tools/script.sh .
 RUN chmod +x script.sh
 
 # Expose the PHP-FPM port
