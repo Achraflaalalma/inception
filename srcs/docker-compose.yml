@@ -26,6 +26,8 @@ services:
       - mariadb_data:/var/lib/mysql
     env_file:
       - .env
+    secrets:
+      - db_pass
     networks:
       - my_network
     restart: unless-stopped
@@ -38,6 +40,10 @@ services:
       - wordpress_data:/var/www/html
     env_file:
       - .env
+    secrets:
+      - db_pass
+      - admin_pass
+      - user_pass
     networks:
       - my_network
     depends_on:
@@ -52,10 +58,11 @@ networks:
   my_network:
     driver: bridge
 
-# secrets:
-#   credentials:
-#     external: true
-#   db_password:
-#     external: true
-#   db_root_password:
-#     external: true
+secrets:
+  db_pass:
+    file: ./secrets/db_pass.txt
+  admin_pass:
+    file: ./secrets/admin_pass.txt
+  user_pass:
+    file: ./secrets/user_pass.txt
+  
