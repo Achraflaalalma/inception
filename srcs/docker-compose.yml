@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   nginx:
-    build: requirements/nginx
+    # build: requirements/nginx
     image: nginx
-    container_name: nginx
+    # container_name: nginx
     ports:
       - "443:443"
     volumes:
@@ -13,13 +13,13 @@ services:
       - my_network
     depends_on:
       - wordpress
-    restart: unless-stopped
+    # restart: unless-stopped
 
 
   mariadb:
-    build: requirements/mariadb
+    # build: requirements/mariadb
     image: mariadb
-    container_name: mariadb
+    # container_name: mariadb
     ports:
       - "3306:3306"
     volumes:
@@ -30,12 +30,12 @@ services:
       - db_pass
     networks:
       - my_network
-    restart: unless-stopped
+    # restart: unless-stopped
 
   wordpress:
-    build: requirements/wordpress
+    # build: requirements/wordpress
     image: wordpress
-    container_name: wp-php
+    # container_name: wp-php
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -48,7 +48,7 @@ services:
       - my_network
     depends_on:
       - mariadb
-    restart: unless-stopped
+    # restart: unless-stopped
 
 volumes:
   wordpress_data:
@@ -60,9 +60,9 @@ networks:
 
 secrets:
   db_pass:
-    file: ./secrets/db_pass.txt
+    external: true
   admin_pass:
-    file: ./secrets/admin_pass.txt
+    external: true
   user_pass:
-    file: ./secrets/user_pass.txt
+    external: true
   
