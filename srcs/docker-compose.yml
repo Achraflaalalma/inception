@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   nginx:
-    # build: requirements/nginx
+    build: requirements/nginx
     image: nginx
-    # container_name: nginx
+    container_name: nginx
     ports:
       - "443:443"
     volumes:
@@ -13,42 +13,49 @@ services:
       - my_network
     depends_on:
       - wordpress
-    # restart: unless-stopped
+    restart: unless-stopped
 
 
   mariadb:
-    # build: requirements/mariadb
+    build: requirements/mariadb
     image: mariadb
-    # container_name: mariadb
+    container_name: mariadb
     ports:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:
       - .env
-    secrets:
-      - db_pass
     networks:
       - my_network
-    # restart: unless-stopped
+    restart: unless-stopped
 
   wordpress:
-    # build: requirements/wordpress
+    build: requirements/wordpress
     image: wordpress
-    # container_name: wp-php
+    container_name: wp-php
     volumes:
       - wordpress_data:/var/www/html
     env_file:
       - .env
-    secrets:
-      - db_pass
-      - admin_pass
-      - user_pass
     networks:
       - my_network
     depends_on:
       - mariadb
-    # restart: unless-stopped
+    restart: unless-stopped
+
+  ftp:
+    build: requirements/bonus/ftp
+    image: ftp
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "30000-30100:30000-30100"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - my_network
+    restart: unless-stopped
 
 volumes:
   wordpress_data:
@@ -57,12 +64,3 @@ volumes:
 networks:
   my_network:
     driver: bridge
-
-secrets:
-  db_pass:
-    external: true
-  admin_pass:
-    external: true
-  user_pass:
-    external: true
-  

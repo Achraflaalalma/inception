@@ -1,25 +1,22 @@
 FROM debian:11
 
 # Install vsftpd
-# RUN apt-get update && apt-get install -y vsftpd && apt-get clean
+RUN apt-get update && apt-get install -y vsftpd nano ftp && apt-get clean
 
-# # Copy the vsftpd configuration file
-# COPY vsftpd.conf /etc/vsftpd.conf
+# Create an FTP user with a home directory
+RUN useradd -m -d /var/www/html -s /bin/bash ftpuser && \
+    echo "ftpuser:frida2023" | chpasswd && \
+    chown -R ftpuser:ftpuser /var/www/html && \
+    chmod -R 755 /var/www/html
 
-# # Create an FTP user with a home directory
-# RUN useradd -m -d /var/www/html -s /bin/bash ftpuser && \
-#     echo "ftpuser:password" | chpasswd
+# Copy vsftpd configuration file
+COPY conf/vsftpd.conf /etc/vsftpd.conf
 
-# # Ensure correct permissions
-# RUN chmod 755 /var/www/html
+# Create a directory for the pid file
+RUN mkdir -p /var/run/vsftpd/empty
 
-# # Create required directory
-# RUN mkdir -p /var/run/vsftpd/empty
-
-# # Expose FTP ports
-# EXPOSE 21 21000-21010
+# Expose FTP port
+EXPOSE 21
 
 # # Start vsftpd
-# CMD ["vsftpd", "/etc/vsftpd.conf"]
-
-CMD ["tail", "-f", "/dev/null"]
+CMD ["vsftpd", "/etc/vsftpd.conf"]
