@@ -13,10 +13,7 @@ RUN curl -sL http://download.redis.io/redis-stable.tar.gz | tar xz \
     && make \
     && make install
 
-# # Create the necessary Redis configuration directory
-# RUN mkdir -p /etc/redis
-# # Copy the configuration file
-# COPY conf/redis.conf /etc/redis/redis.conf
+RUN mkdir -p /run/php
 
 # Expose the Redis port
 EXPOSE 6379

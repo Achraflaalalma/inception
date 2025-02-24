@@ -67,6 +67,16 @@ services:
       - my_network
     restart: unless-stopped
 
+  adminer:
+    build: requirements/bonus/adminer
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    restart: unless-stopped
+
 volumes:
   wordpress_data:
   mariadb_data:
