@@ -17,6 +17,7 @@ RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = wp-php:9000|' /etc/php/
 
 # Download WordPress
 RUN mkdir -p /var/www/html
+RUN chmod -R 777 /var/www/html/
 
 # Create necessary directories
 RUN mkdir -p /run/php

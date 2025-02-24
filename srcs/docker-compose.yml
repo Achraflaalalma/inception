@@ -15,7 +15,6 @@ services:
       - wordpress
     restart: unless-stopped
 
-
   mariadb:
     build: requirements/mariadb
     image: mariadb
@@ -42,6 +41,17 @@ services:
       - my_network
     depends_on:
       - mariadb
+      - redis
+    restart: unless-stopped
+
+  redis:
+    build: requirements/bonus/redis
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network
     restart: unless-stopped
 
   ftp:
