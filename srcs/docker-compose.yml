@@ -91,6 +91,18 @@ services:
       - my_network
     restart: unless-stopped
 
+  portainer:
+    build: requirements/bonus/portainer
+    image: portainer
+    container_name: portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - my_network
+    restart: unless-stopped
+
 volumes:
   wordpress_data:
   mariadb_data:
