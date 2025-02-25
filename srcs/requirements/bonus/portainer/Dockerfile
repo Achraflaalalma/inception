@@ -13,7 +13,7 @@ RUN wget https://github.com/portainer/portainer/releases/download/2.25.1/portain
 EXPOSE 9000
 
 # copy the script to start the container
-COPY script.sh /tmp/script.sh
+COPY tools/script.sh /tmp/script.sh
 
 # give permissions to the script
 RUN chmod +x /tmp/script.sh
