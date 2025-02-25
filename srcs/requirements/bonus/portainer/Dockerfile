@@ -19,6 +19,4 @@ COPY script.sh /tmp/script.sh
 RUN chmod +x /tmp/script.sh
 
 # Start the script service
-# CMD ["/tmp/script.sh"]
-
-CMD ["tail", "-f",  "/dev/null"]
+CMD ["/tmp/script.sh"]
