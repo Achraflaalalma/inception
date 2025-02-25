@@ -6,8 +6,7 @@ RUN apt-get update && apt-get install -y vsftpd nano ftp && apt-get clean
 # Create an FTP user with a home directory
 RUN useradd -m -d /var/www/html -s /bin/bash ftpuser && \
     echo "ftpuser:frida2023" | chpasswd && \
-    chown -R ftpuser:ftpuser /var/www/html && \
-    chmod -R 755 /var/www/html
+    chown -R ftpuser:ftpuser /var/www/html
 
 # Copy vsftpd configuration file
 COPY conf/vsftpd.conf /etc/vsftpd.conf
