@@ -100,8 +100,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - PORTAINER_ADMIN_PASSWORD=${PORTAINER_ADMIN_PASSWORD}
-      - DISABLE_AUTH=true
+      - PORTAINER_PASS=${PORTAINER_PASS}
     networks:
       - my_network
     restart: unless-stopped

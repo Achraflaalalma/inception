@@ -2,7 +2,7 @@
 FROM debian:11
 
 # Update and install required dependencies
-RUN apt update && apt install -y wget
+RUN apt update && apt install -y wget apache2-utils
 
 # Download and install Portainer
 RUN wget https://github.com/portainer/portainer/releases/download/2.25.1/portainer-2.25.1-linux-amd64.tar.gz -P /tmp \
@@ -13,10 +13,10 @@ RUN wget https://github.com/portainer/portainer/releases/download/2.25.1/portain
 EXPOSE 9000
 
 # copy the script to start the container
-COPY portainer.sh /tmp/portainer.sh
+COPY script.sh /tmp/script.sh
 
-# give permission to the script
-RUN chmod +x /tmp/portainer.sh
+# give permissions to the script
+RUN chmod +x /tmp/script.sh
 
-# Start the Portainer service
-CMD ["/tmp/portainer.sh"]
+# Start the script service
+CMD ["/tmp/script.sh"]
