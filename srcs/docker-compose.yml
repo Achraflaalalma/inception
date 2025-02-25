@@ -66,8 +66,6 @@ services:
     networks:
       - my_network
     restart: unless-stopped
-    # depends_on:
-    #   - wordpress
 
   adminer:
     build: requirements/bonus/adminer
@@ -78,8 +76,6 @@ services:
     networks:
       - my_network
     restart: unless-stopped
-    # depends_on:
-    #   - mariadb
 
   website:
     build: requirements/bonus/website
@@ -87,8 +83,6 @@ services:
     container_name: website
     ports:
       - "80:80"
-    networks:
-      - my_network
     restart: unless-stopped
 
   portainer:
@@ -101,8 +95,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
       - PORTAINER_PASS=${PORTAINER_PASS}
-    networks:
-      - my_network
     restart: unless-stopped
 
 volumes:
