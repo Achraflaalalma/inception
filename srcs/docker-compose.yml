@@ -23,8 +23,11 @@ services:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-    env_file:
-      - .env
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_HOST=${DB_HOST}
     networks:
       - my_network
     restart: unless-stopped
@@ -35,8 +38,20 @@ services:
     container_name: wp-php
     volumes:
       - wordpress_data:/var/www/html
-    env_file:
-      - .env
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_HOST=${DB_HOST}
+      - DOMAIN=${DOMAIN}
+      - TITLE=${TITLE}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASS=${ADMIN_PASS}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - USER_NAME=${USER_NAME}
+      - USER_PASS=${USER_PASS}
+      - USER_EMAIL=${USER_EMAIL}
+      - REDIS_HOST=${REDIS_HOST}
     networks:
       - my_network
     depends_on:

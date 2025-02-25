@@ -13,8 +13,6 @@ RUN curl -sL http://download.redis.io/redis-stable.tar.gz | tar xz \
     && make \
     && make install
 
-RUN mkdir -p /run/php
-
 # Expose the Redis port
 EXPOSE 6379
 

@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
  # Change the listen directive to use port 9000 (TCP)
-RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = wp-php:9000|' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = wp-php:9001|' /etc/php/7.4/fpm/pool.d/www.conf
 
 # Download WordPress
 RUN mkdir -p /var/www/html
