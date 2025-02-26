@@ -57,6 +57,10 @@ services:
       - redis
     restart: unless-stopped
 
+################################
+######## BONUS SERVICES ########
+################################
+
   redis:
     build: requirements/bonus/redis
     image: redis:inception
