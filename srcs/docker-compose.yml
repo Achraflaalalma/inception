@@ -117,7 +117,17 @@ services:
 
 volumes:
   wordpress_data:
+    name: wordpress_data
+    driver_opts:
+      type: bind
+      o: bind
+      device: /home/alaalalm/data/wordpress
   mariadb_data:
+    name: mariadb_data
+    driver_opts:
+      type: bind
+      o: bind
+      device: /home/alaalalm/data/mariadb
 
 networks:
   my_network:
