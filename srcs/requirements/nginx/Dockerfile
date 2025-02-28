@@ -5,8 +5,7 @@ RUN apt-get update \
     && apt-get install -y \
     nginx \
     openssl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 
 # # Create SSL certificates (for testing, generate self-signed certs)
 RUN mkdir -p /etc/ssl/private /etc/ssl/certs \

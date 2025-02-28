@@ -54,7 +54,7 @@ services:
       - my_network
     depends_on:
       - mariadb
-      - redis
+      # - redis
     restart: unless-stopped
 
 ################################
@@ -121,13 +121,13 @@ volumes:
     driver_opts:
       type: bind
       o: bind
-      device: /home/alaalalm/data/wordpress
+      device: /home/lfrida/data/wordpress
   mariadb_data:
     name: mariadb_data
     driver_opts:
       type: bind
       o: bind
-      device: /home/alaalalm/data/mariadb
+      device: /home/lfrida/data/mariadb
 
 networks:
   my_network:
