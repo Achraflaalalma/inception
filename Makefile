@@ -19,6 +19,5 @@ ps:
 
 # Remove all containers, networks, and volumes
 clean: down
-	docker volume prune -f
-	docker network prune -f
+	cd srcs/ && docker compose down -v
 	docker rmi -f $(shell docker images -q)
