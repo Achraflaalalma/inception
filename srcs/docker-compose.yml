@@ -54,7 +54,7 @@ services:
       - my_network
     depends_on:
       - mariadb
-      # - redis
+      - redis
     restart: unless-stopped
 
 ################################

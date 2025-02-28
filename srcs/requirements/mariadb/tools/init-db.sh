@@ -9,4 +9,4 @@ mariadb -e "FLUSH PRIVILEGES;"
 
 service mariadb stop
 
-mysqld_safe --datadir='/var/lib/mysql' 
+mysqld_safe 
