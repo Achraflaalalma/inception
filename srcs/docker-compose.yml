@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   nginx:
     build: requirements/nginx
@@ -26,6 +24,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - DB_HOST=${DB_HOST}
+      - ROOT_PASS=${ROOT_PASS}
     networks:
       - my_network
     restart: unless-stopped
@@ -121,13 +120,13 @@ volumes:
     driver_opts:
       type: bind
       o: bind
-      device: /home/lfrida/data/wordpress
+      device: /home/alaalalm/data/wordpress
   mariadb_data:
     name: mariadb_data
     driver_opts:
       type: bind
       o: bind
-      device: /home/lfrida/data/mariadb
+      device: /home/alaalalm/data/mariadb
 
 networks:
   my_network:

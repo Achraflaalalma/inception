@@ -4,8 +4,6 @@ FROM debian:11
 RUN apt-get update && apt-get install -y mariadb-server mariadb-client \
     && apt-get clean
 
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
-
 # Expose the default MariaDB port
 EXPOSE 3306
 
