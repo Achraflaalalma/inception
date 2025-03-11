@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     && apt-get clean
 
- # Change the listen directive to use port 9000 (TCP)
+ # Change the listen directive to use port 9001 (TCP)
 RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9001|' /etc/php/7.4/fpm/pool.d/www.conf
 
 # Download WordPress
@@ -22,17 +22,12 @@ RUN chmod -R 777 /var/www/html/
 # Create necessary directories
 RUN mkdir -p /run/php
 
-#Set proper permissions
-# RUN chown -R www-data:www-data /var/www/html \
-#     && chmod -R 755 /var/www/html
-
 # Copy the script to the container and make it executable
 COPY tools/script.sh .
 RUN chmod +x script.sh
 
 # Expose the PHP-FPM port
 EXPOSE 9000
-
 
 # Start PHP-FPM in the foreground
 CMD ["./script.sh"]
